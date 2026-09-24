@@ -1,38 +1,72 @@
 # Evidências da Funcionalidade de Exclusão com Confirmação
 
-Este documento apresenta a sequência de evidências da implementação do fluxo de exclusão segura de tarefas com diálogo de confirmação (Jetpack Compose Material 3).
+---
+
+## 1. Lista de tarefas vazia
+
+**Arquivo:** `docs/images/exclusao/Image-checkpoint1.jpg`
+
+Esta é a tela inicial **Minhas Tarefas** sem nenhuma tarefa cadastrada. No centro aparece a mensagem *"Nenhuma tarefa cadastrada."*. No canto inferior direito fica o botão flutuante (FAB) que abre o cadastro de uma nova tarefa.
+
+![Lista de tarefas vazia](docs/images/exclusao/Image-checkpoint1.jpg)
 
 ---
 
-### 1. Lista antes da exclusão
-Exibição da lista de tarefas cadastradas antes de acionar a exclusão.
+## 2. Formulário de cadastro preenchido
 
-![1. Lista antes da exclusão](docs/images/exclusao/01_lista_antes.png)
+**Arquivo:** `docs/images/exclusao/Image-checkpoint3.jpg`
 
----
+Esta é a tela de criação de tarefa, com os campos preenchidos:
 
-### 2. Diálogo aberto com a tarefa selecionada
-Ao tocar no ícone de lixeira, o diálogo de confirmação do Material 3 é exibido sobre a tela da lista, informando claramente o título da tarefa selecionada.
+- **Título:** `Trocar roupa`
+- **Descrição:** `Teste`
+- **Definir data e horário:** chave ativada, o que mostra os botões **Selecionar data** e **Selecionar hora**.
 
-![2. Diálogo aberto com a tarefa selecionada](docs/images/exclusao/02_dialogo_aberto.png)
+O botão **Salvar** fica desabilitado enquanto a data e o horário não forem escolhidos. Isso impede que a tarefa seja salva com informações incompletas. O botão **Cancelar** descarta o cadastro.
 
----
-
-### 3. Resultado ao cancelar
-Ao acionar o botão **Cancelar**, o diálogo é fechado e a lista permanece inalterada sem remover nenhuma tarefa.
-
-![3. Resultado ao cancelar](docs/images/exclusao/03_resultado_cancelar.png)
+![Formulário de cadastro preenchido](docs/images/exclusao/Image-checkpoint3.jpg)
 
 ---
 
-### 4. Nova abertura do diálogo
-Reabertura do diálogo de confirmação para a mesma tarefa selecionada para confirmar a remoção.
+## 3. Seleção da data
 
-![4. Nova abertura do diálogo](docs/images/exclusao/04_reabertura_dialogo.png)
+**Arquivo:** `docs/images/exclusao/Image-checkpoint2.jpg`
+
+Ao tocar em **Selecionar data**, abre o seletor de data (`DatePicker`) do Material 3. Na imagem:
+
+- O dia atual (**22 de setembro de 2026**) aparece destacado com um contorno.
+- A data escolhida é **25 de setembro de 2026** (*Sep 25, 2026*), marcada em azul.
+- O botão **OK** confirma a data e o botão **Cancelar** fecha o seletor sem alterar nada.
+
+![Seleção da data](docs/images/exclusao/Image-checkpoint2.jpg)
 
 ---
 
-### 5. Resultado após confirmar a exclusão
-Ao acionar o botão **Excluir**, a tarefa selecionada é definitivamente removida e o diálogo é fechado, atualizando a lista.
+## 4. Seleção do horário
 
-![5. Resultado após confirmar a exclusão](docs/images/exclusao/05_resultado_confirmar.png)
+**Arquivo:** `docs/images/exclusao/Image-checkpoint5.jpg`
+
+Ao tocar em **Selecionar hora**, abre o seletor de horário (`TimePicker`) do Material 3 em formato de relógio analógico. O horário escolhido é **14:00**. O campo de minutos está ativo, com o ponteiro no `0`.
+
+Ao fundo aparece o formulário com o título *"Trocar roupa"* e a descrição *"Teste"*. O botão de data já mostra o dia escolhido na etapa anterior. O botão **OK** confirma o horário.
+
+![Seleção do horário](docs/images/exclusao/Image-checkpoint5.jpg)
+
+---
+
+## 5. Diálogo de confirmação de exclusão
+
+**Arquivo:** `docs/images/exclusao/Image-checkpoint4.jpg`
+
+Depois de salva, a tarefa **"Trocar roupa"** (descrição *"Teste"*) aparece na lista **Minhas Tarefas**. Ela tem uma caixa de seleção para marcar como concluída e um ícone de lixeira para excluir.
+
+Ao tocar na lixeira, abre um `AlertDialog` do Material 3 sobre a lista, que fica escurecida ao fundo. O diálogo contém:
+
+- **Título:** *Excluir Tarefa*
+- **Mensagem:** *Tem certeza de que deseja excluir a tarefa "Trocar roupa"?*, com o nome da tarefa selecionada para evitar exclusões por engano.
+- **Cancelar:** fecha o diálogo e mantém a tarefa na lista.
+- **Excluir** (em vermelho, por ser uma ação destrutiva): remove a tarefa de forma definitiva e atualiza a lista.
+
+![Diálogo de confirmação de exclusão](docs/images/exclusao/Image-checkpoint4.jpg)
+
+---
